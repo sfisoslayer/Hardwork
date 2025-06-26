@@ -503,8 +503,8 @@ async def startup_event():
     # Refresh proxies
     await proxy_manager.refresh_proxies()
     
-    # Start browser
-    await browser_automator.start_browser()
+    # Skip browser startup for testing
+    # await browser_automator.start_browser()
     
     logger.info("Crypto Faucet Automator started successfully!")
 
