@@ -56,6 +56,20 @@ class SessionConfig(BaseModel):
     proxy_rotation_interval: int = 30
     captcha_solving_enabled: bool = True
 
+class WithdrawalRequest(BaseModel):
+    wallet_address: str
+    amount: float
+    faucet_sources: List[str]
+    
+class WithdrawalStatus(BaseModel):
+    id: str
+    wallet_address: str
+    amount: float
+    status: str
+    created_at: datetime
+    processed_at: Optional[datetime] = None
+    faucet_sources: List[str]
+
 class ClaimSession(BaseModel):
     id: str
     faucet_id: str
