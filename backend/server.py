@@ -255,6 +255,187 @@ DEFAULT_FAUCETS = [
         "captcha_selector": ".coins-captcha",
         "cooldown_minutes": 45,
         "enabled": True
+    },
+    # Additional researched faucets - batch 2
+    {
+        "id": "btcfree",
+        "name": "BTC Free",
+        "url": "https://btcfree.io/",
+        "claim_selector": "#claim-free",
+        "captcha_selector": ".captcha-free",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "cryptowin",
+        "name": "CryptoWin",
+        "url": "https://cryptowin.io/",
+        "claim_selector": ".win-claim",
+        "captcha_selector": ".win-captcha",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "satoshipoint",
+        "name": "Satoshi Point",
+        "url": "https://satoshipoint.com/",
+        "claim_selector": "#point-claim",
+        "captcha_selector": ".point-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinblender",
+        "name": "Bitcoin Blender",
+        "url": "https://bitcoinblender.org/",
+        "claim_selector": ".blend-claim",
+        "captcha_selector": ".blend-captcha",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "freesatoshi",
+        "name": "Free Satoshi",
+        "url": "https://freesatoshi.com/",
+        "claim_selector": "#satoshi-claim",
+        "captcha_selector": ".satoshi-captcha",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "coinpayz",
+        "name": "Coinpayz",
+        "url": "https://coinpayz.eu/",
+        "claim_selector": ".payz-claim",
+        "captcha_selector": ".payz-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "earnbitcoin",
+        "name": "Earn Bitcoin",
+        "url": "https://earnbitcoin.world/",
+        "claim_selector": "#earn-claim",
+        "captcha_selector": ".earn-captcha",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinker",
+        "name": "Bitcoinker",
+        "url": "https://bitcoinker.com/",
+        "claim_selector": ".ker-claim",
+        "captcha_selector": ".ker-captcha",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinzebra",
+        "name": "Bitcoin Zebra",
+        "url": "https://bitcoinzebra.com/",
+        "claim_selector": "#zebra-claim",
+        "captcha_selector": ".zebra-captcha",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "faucethub",
+        "name": "FaucetHub",
+        "url": "https://faucethub.io/",
+        "claim_selector": ".hub-claim",
+        "captcha_selector": ".hub-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinday",
+        "name": "Bitcoin Day",
+        "url": "https://bitcoinday.org/",
+        "claim_selector": "#day-claim",
+        "captcha_selector": ".day-captcha",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "claimbtc",
+        "name": "Claim BTC",
+        "url": "https://claimbtc.com/",
+        "claim_selector": ".claim-btn-btc",
+        "captcha_selector": ".claim-captcha-btc",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinflood",
+        "name": "Bitcoin Flood",
+        "url": "https://bitcoinflood.com/",
+        "claim_selector": "#flood-claim",
+        "captcha_selector": ".flood-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "cryptofaucets",
+        "name": "Crypto Faucets",
+        "url": "https://cryptofaucets.net/",
+        "claim_selector": ".crypto-claim-btn",
+        "captcha_selector": ".crypto-captcha-box",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinget",
+        "name": "Bitcoin Get",
+        "url": "https://bitcoinget.com/",
+        "claim_selector": "#get-claim",
+        "captcha_selector": ".get-captcha",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "satoshispirit",
+        "name": "Satoshi Spirit",
+        "url": "https://satoshispirit.com/",
+        "claim_selector": ".spirit-claim",
+        "captcha_selector": ".spirit-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "freecoin",
+        "name": "Free Coin",
+        "url": "https://freecoin.io/",
+        "claim_selector": "#coin-free-claim",
+        "captcha_selector": ".coin-free-captcha",
+        "cooldown_minutes": 30,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinworm",
+        "name": "Bitcoin Worm",
+        "url": "https://bitcoinworm.com/",
+        "claim_selector": ".worm-claim",
+        "captcha_selector": ".worm-captcha",
+        "cooldown_minutes": 60,
+        "enabled": True
+    },
+    {
+        "id": "satoshiforest",
+        "name": "Satoshi Forest",
+        "url": "https://satoshiforest.com/",
+        "claim_selector": "#forest-claim",
+        "captcha_selector": ".forest-captcha",
+        "cooldown_minutes": 45,
+        "enabled": True
+    },
+    {
+        "id": "bitcoinrain",
+        "name": "Bitcoin Rain",
+        "url": "https://bitcoinrain.io/",
+        "claim_selector": ".rain-claim-btn",
+        "captcha_selector": ".rain-captcha-container",
+        "cooldown_minutes": 30,
+        "enabled": True
     }
 ]
 
