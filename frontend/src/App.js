@@ -68,6 +68,52 @@ function App() {
     }
   }, []);
 
+  const fetchWithdrawals = useCallback(async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/withdrawals`);
+      if (response.ok) {
+        const data = await response.json();
+        setWithdrawals(data);
+      }
+    } catch (error) {
+      console.error('Error fetching withdrawals:', error);
+    }
+  }, []);
+
+  const requestWithdrawal = async () => {
+    if (!withdrawalAmount || selectedWithdrawalFaucets.length === 0) {
+      addLog('Please enter amount and select faucets', 'warning');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/withdrawals/request`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          wallet_address: walletAddress,
+          amount: parseFloat(withdrawalAmount),
+          faucet_sources: selectedWithdrawalFaucets
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        addLog(`Withdrawal requested: ${data.withdrawal_id}`, 'success');
+        setWithdrawalAmount('');
+        setSelectedWithdrawalFaucets([]);
+        fetchWithdrawals();
+      } else {
+        const error = await response.json();
+        addLog(`Withdrawal failed: ${error.detail}`, 'error');
+      }
+    } catch (error) {
+      addLog(`Error requesting withdrawal: ${error.message}`, 'error');
+    }
+  };
+
   const refreshProxies = async () => {
     try {
       const response = await fetch(`${BACKEND_URL}/api/proxies/refresh`, {
