@@ -420,6 +420,34 @@ function App() {
             {/* Quick Actions */}
             <div className="bg-black/20 backdrop-blur-lg rounded-xl p-6 border border-white/10">
               <h3 className="text-xl font-bold text-white mb-4">Quick Start</h3>
+              
+              {/* Session Count Slider */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Number of Sessions to Start: {sessionCount}
+                </label>
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-400">1</span>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={sessionCount}
+                    onChange={(e) => setSessionCount(parseInt(e.target.value))}
+                    className="flex-1 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                    style={{
+                      background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${sessionCount}%, #374151 ${sessionCount}%, #374151 100%)`
+                    }}
+                  />
+                  <span className="text-sm text-gray-400">100</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>Single</span>
+                  <span>Moderate</span>
+                  <span>Maximum</span>
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-4">
                 <button
                   onClick={selectAllFaucets}
@@ -432,7 +460,7 @@ function App() {
                   disabled={isStarting || selectedFaucets.length === 0}
                   className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
                 >
-                  {isStarting ? 'Starting...' : 'Start Claiming'}
+                  {isStarting ? `Starting ${sessionCount} Sessions...` : `Start ${sessionCount} Session${sessionCount > 1 ? 's' : ''}`}
                 </button>
                 <button
                   onClick={clearAllFaucets}
@@ -442,7 +470,7 @@ function App() {
                 </button>
               </div>
               <p className="text-gray-400 mt-2">
-                Selected: {selectedFaucets.length} faucets
+                Selected: {selectedFaucets.length} faucets • Sessions: {sessionCount}
               </p>
             </div>
           </div>
