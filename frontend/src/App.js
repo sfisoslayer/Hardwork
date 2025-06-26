@@ -26,6 +26,10 @@ function App() {
     cooldown_minutes: 60
   });
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [withdrawalAmount, setWithdrawalAmount] = useState('');
+  const [selectedWithdrawalFaucets, setSelectedWithdrawalFaucets] = useState([]);
+  const [withdrawals, setWithdrawals] = useState([]);
+  const [walletAddress] = useState('bc1qzh55yrw9z4ve9zxy04xuw9mq838g5c06tqvrxk');
 
   // Fetch data functions
   const fetchStats = useCallback(async () => {
