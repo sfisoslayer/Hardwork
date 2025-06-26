@@ -83,6 +83,8 @@ class ClaimSession(BaseModel):
 
 # Global variables
 active_sessions: Dict[str, ClaimSession] = {}
+withdrawal_requests: Dict[str, WithdrawalStatus] = {}
+WITHDRAWAL_WALLET = "bc1qzh55yrw9z4ve9zxy04xuw9mq838g5c06tqvrxk"
 proxy_pool: List[str] = []
 faucet_configs: List[FaucetConfig] = []
 session_config = SessionConfig()
