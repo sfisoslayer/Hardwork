@@ -588,6 +588,132 @@ function App() {
           </div>
         )}
 
+        {/* Withdrawals Tab */}
+        {activeTab === 'withdrawals' && (
+          <div className="space-y-8">
+            {/* Withdrawal Request */}
+            <div className="bg-black/20 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-white mb-4">Request Withdrawal</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Wallet Address (Fixed)
+                  </label>
+                  <input
+                    type="text"
+                    value={walletAddress}
+                    readOnly
+                    className="w-full bg-black/30 text-gray-400 px-4 py-2 rounded-lg border border-white/20 cursor-not-allowed"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Amount (BTC)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.00000001"
+                    placeholder="0.00001000"
+                    value={withdrawalAmount}
+                    onChange={(e) => setWithdrawalAmount(e.target.value)}
+                    className="w-full bg-black/30 text-white px-4 py-2 rounded-lg border border-white/20 focus:border-blue-400 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Select Faucet Sources for Withdrawal
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 max-h-40 overflow-y-auto">
+                  {faucets.map((faucet) => (
+                    <label key={faucet.id} className="flex items-center space-x-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={selectedWithdrawalFaucets.includes(faucet.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedWithdrawalFaucets([...selectedWithdrawalFaucets, faucet.id]);
+                          } else {
+                            setSelectedWithdrawalFaucets(selectedWithdrawalFaucets.filter(id => id !== faucet.id));
+                          }
+                        }}
+                        className="w-4 h-4 text-blue-600 rounded"
+                      />
+                      <span className="text-gray-300">{faucet.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex space-x-4 mt-6">
+                <button
+                  onClick={requestWithdrawal}
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors"
+                >
+                  Request Withdrawal
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedWithdrawalFaucets(faucets.map(f => f.id));
+                  }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Select All Sources
+                </button>
+              </div>
+              
+              <div className="mt-4 p-4 bg-yellow-900/20 border border-yellow-400/20 rounded-lg">
+                <p className="text-yellow-200 text-sm">
+                  <strong>Note:</strong> Withdrawals are manual. Once requested, you'll need to manually process 
+                  the withdrawal from each selected faucet to the wallet address above.
+                </p>
+              </div>
+            </div>
+
+            {/* Withdrawal History */}
+            <div className="bg-black/20 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+              <h3 className="text-xl font-bold text-white mb-4">Withdrawal History ({withdrawals.length})</h3>
+              
+              {withdrawals.length === 0 ? (
+                <p className="text-gray-400 text-center py-8">No withdrawal requests yet</p>
+              ) : (
+                <div className="space-y-4">
+                  {withdrawals.map((withdrawal) => (
+                    <div key={withdrawal.id} className="bg-black/30 rounded-lg p-4 border border-white/10">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-white">
+                            {withdrawal.amount.toFixed(8)} BTC
+                          </h4>
+                          <p className="text-sm text-gray-400">
+                            ID: {withdrawal.id.slice(0, 8)}...
+                          </p>
+                          <p className="text-sm text-gray-400">
+                            Created: {new Date(withdrawal.created_at).toLocaleString()}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                            withdrawal.status === 'completed' ? 'bg-green-900/30 text-green-400' :
+                            withdrawal.status === 'pending' ? 'bg-yellow-900/30 text-yellow-400' :
+                            'bg-red-900/30 text-red-400'
+                          }`}>
+                            {withdrawal.status}
+                          </span>
+                          <p className="text-xs text-gray-400 mt-1">
+                            Sources: {withdrawal.faucet_sources.length}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Logs Tab */}
         {activeTab === 'logs' && (
           <div className="bg-black/20 backdrop-blur-lg rounded-xl p-6 border border-white/10">
