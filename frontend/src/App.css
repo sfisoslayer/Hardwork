@@ -201,6 +201,28 @@
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
 }
 
+/* Custom slider styling */
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #1e40af;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #1e40af;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
 /* Custom scrollbar for specific elements */
 .custom-scrollbar {
   scrollbar-width: thin;
