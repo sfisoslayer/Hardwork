@@ -138,22 +138,32 @@ function App() {
 
     setIsStarting(true);
     try {
-      const response = await fetch(`${BACKEND_URL}/api/sessions/start`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(selectedFaucets)
-      });
+      // Start multiple sessions based on sessionCount
+      for (let i = 0; i < sessionCount; i++) {
+        const response = await fetch(`${BACKEND_URL}/api/sessions/start`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(selectedFaucets)
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        addLog(`Started claiming session: ${data.session_id}`, 'success');
-        fetchSessions();
-        fetchStats();
+        if (response.ok) {
+          const data = await response.json();
+          addLog(`Started session ${i + 1}/${sessionCount}: ${data.session_id}`, 'success');
+        }
+        
+        // Small delay between session starts
+        if (i < sessionCount - 1) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
       }
+      
+      addLog(`Successfully started ${sessionCount} claiming sessions`, 'success');
+      fetchSessions();
+      fetchStats();
     } catch (error) {
-      addLog(`Error starting session: ${error.message}`, 'error');
+      addLog(`Error starting sessions: ${error.message}`, 'error');
     } finally {
       setIsStarting(false);
     }
