@@ -1,38 +1,225 @@
-.App {
-    text-align: center;
+/* App.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom styles */
+.crypto-bg {
+  background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #3730a3 100%);
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom button styles */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+.btn-success {
+  @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+/* Card styles */
+.card {
+  @apply bg-black bg-opacity-20 backdrop-blur-lg rounded-xl border border-white border-opacity-10;
+}
+
+/* Status indicators */
+.status-running {
+  @apply text-green-400;
+}
+
+.status-stopped {
+  @apply text-red-400;
+}
+
+.status-error {
+  @apply text-red-500;
+}
+
+.status-pending {
+  @apply text-yellow-400;
+}
+
+/* Log entry styles */
+.log-success {
+  @apply border-l-4 border-green-400 bg-green-900 bg-opacity-20;
+}
+
+.log-error {
+  @apply border-l-4 border-red-400 bg-red-900 bg-opacity-20;
+}
+
+.log-warning {
+  @apply border-l-4 border-yellow-400 bg-yellow-900 bg-opacity-20;
+}
+
+.log-info {
+  @apply border-l-4 border-blue-400 bg-blue-900 bg-opacity-20;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .responsive-flex {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    gap: 1rem;
+  }
 }
 
-.App-link {
-    color: #61dafb;
+/* Loading states */
+.loading {
+  @apply animate-pulse;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.loading-skeleton {
+  @apply bg-gray-700 rounded animate-pulse;
+}
+
+/* Custom checkbox styling */
+.custom-checkbox {
+  @apply appearance-none w-4 h-4 border-2 border-white border-opacity-30 rounded bg-transparent checked:bg-blue-600 checked:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50;
+}
+
+/* Table styles */
+.table-header {
+  @apply bg-black bg-opacity-30 text-white font-semibold py-3 px-4 text-left;
+}
+
+.table-cell {
+  @apply py-3 px-4 text-gray-300;
+}
+
+.table-row {
+  @apply border-b border-white border-opacity-10 hover:bg-white hover:bg-opacity-5 transition-colors;
+}
+
+/* Modal styles */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50;
+}
+
+.modal-content {
+  @apply bg-gray-900 rounded-xl p-6 max-w-lg w-full mx-4 border border-white border-opacity-20;
+}
+
+/* Form styles */
+.form-input {
+  @apply bg-black bg-opacity-30 text-white px-4 py-2 rounded-lg border border-white border-opacity-20 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-30 transition-colors;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-300 mb-2;
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply w-full bg-gray-700 rounded-full h-2;
+}
+
+.progress-fill {
+  @apply h-2 bg-blue-600 rounded-full transition-all duration-300;
+}
+
+/* Notification styles */
+.notification {
+  @apply fixed top-4 right-4 bg-black bg-opacity-80 backdrop-blur-lg border border-white border-opacity-20 rounded-lg p-4 text-white z-50;
+}
+
+.notification-success {
+  @apply border-green-400;
+}
+
+.notification-error {
+  @apply border-red-400;
+}
+
+.notification-warning {
+  @apply border-yellow-400;
+}
+
+.notification-info {
+  @apply border-blue-400;
+}
+
+/* Utility classes */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.glass-effect {
+  @apply bg-black bg-opacity-20 backdrop-blur-lg border border-white border-opacity-10;
+}
+
+.hover-lift {
+  @apply transition-transform hover:scale-105;
+}
+
+.glow-effect {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Custom scrollbar for specific elements */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
