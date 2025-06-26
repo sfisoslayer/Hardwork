@@ -242,14 +242,16 @@ function App() {
     fetchStats();
     fetchFaucets();
     fetchSessions();
+    fetchWithdrawals();
 
     const interval = setInterval(() => {
       fetchStats();
       fetchSessions();
+      fetchWithdrawals();
     }, 5000); // Refresh every 5 seconds
 
     return () => clearInterval(interval);
-  }, [fetchStats, fetchFaucets, fetchSessions]);
+  }, [fetchStats, fetchFaucets, fetchSessions, fetchWithdrawals]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
