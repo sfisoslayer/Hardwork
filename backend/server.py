@@ -782,6 +782,75 @@ async def refresh_proxies():
     await proxy_manager.refresh_proxies()
     return {"message": "Proxies refreshed", "count": len(proxy_manager.proxies)}
 
+@app.get("/api/withdrawals")
+async def get_withdrawals():
+    """Get all withdrawal requests"""
+    return [withdrawal.dict() for withdrawal in withdrawal_requests.values()]
+
+@app.post("/api/withdrawals/request")
+async def request_withdrawal(withdrawal_req: WithdrawalRequest):
+    """Request a withdrawal"""
+    # Validate wallet address
+    if withdrawal_req.wallet_address != WITHDRAWAL_WALLET:
+        raise HTTPException(status_code=400, detail="Invalid wallet address")
+    
+    # Calculate total earnings from selected faucets
+    total_available = 0.0
+    for session in active_sessions.values():
+        if session.faucet_id in withdrawal_req.faucet_sources:
+            total_available += session.total_earnings
+    
+    if withdrawal_req.amount > total_available:
+        raise HTTPException(status_code=400, detail="Insufficient balance")
+    
+    # Create withdrawal request
+    withdrawal_id = str(uuid.uuid4())
+    withdrawal_status = WithdrawalStatus(
+        id=withdrawal_id,
+        wallet_address=withdrawal_req.wallet_address,
+        amount=withdrawal_req.amount,
+        status="pending",
+        created_at=datetime.now(),
+        faucet_sources=withdrawal_req.faucet_sources
+    )
+    
+    withdrawal_requests[withdrawal_id] = withdrawal_status
+    
+    # Deduct from session earnings
+    remaining_amount = withdrawal_req.amount
+    for session in active_sessions.values():
+        if session.faucet_id in withdrawal_req.faucet_sources and remaining_amount > 0:
+            deduction = min(session.total_earnings, remaining_amount)
+            session.total_earnings -= deduction
+            remaining_amount -= deduction
+    
+    return {
+        "message": "Withdrawal request created",
+        "withdrawal_id": withdrawal_id,
+        "status": "pending",
+        "note": "Manual withdrawal required - check your wallet"
+    }
+
+@app.get("/api/withdrawals/{withdrawal_id}")
+async def get_withdrawal_status(withdrawal_id: str):
+    """Get withdrawal status"""
+    if withdrawal_id not in withdrawal_requests:
+        raise HTTPException(status_code=404, detail="Withdrawal not found")
+    
+    return withdrawal_requests[withdrawal_id].dict()
+
+@app.post("/api/withdrawals/{withdrawal_id}/complete")
+async def complete_withdrawal(withdrawal_id: str):
+    """Mark withdrawal as completed (manual process)"""
+    if withdrawal_id not in withdrawal_requests:
+        raise HTTPException(status_code=404, detail="Withdrawal not found")
+    
+    withdrawal = withdrawal_requests[withdrawal_id]
+    withdrawal.status = "completed"
+    withdrawal.processed_at = datetime.now()
+    
+    return {"message": "Withdrawal marked as completed"}
+
 async def run_claiming_session(session_id: str, faucet_ids: List[str]):
     """Background task to run claiming session"""
     session = active_sessions.get(session_id)
